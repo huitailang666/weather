@@ -29,6 +29,11 @@
             android:name="activity.WeatherActivity"
             ></activity>
         
+        <activity 
+            android:name="activity.RecentDaysActivity"
+            ></activity>
+        
+        
         <service 
             android:name="service.AutoUpdateService"
             ></service>

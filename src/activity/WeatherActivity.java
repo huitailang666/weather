@@ -17,8 +17,10 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class WeatherActivity extends Activity implements OnClickListener {
@@ -34,11 +36,13 @@ public class WeatherActivity extends Activity implements OnClickListener {
 	
 	private Button button1;
 	private Button button2;
+	private Button button3;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.weather_layout);
 		
 		cityNameText=(TextView)findViewById(R.id.city_name);
@@ -52,9 +56,10 @@ public class WeatherActivity extends Activity implements OnClickListener {
 		
 		button1=(Button)findViewById(R.id.select_city);
 		button2=(Button)findViewById(R.id.update_weather);
+		button3=(Button)findViewById(R.id.button3);
 		button1.setOnClickListener(this);
 		button2.setOnClickListener(this);
-		
+		button3.setOnClickListener(this);
 		
 		
 		
@@ -173,8 +178,15 @@ public class WeatherActivity extends Activity implements OnClickListener {
 			break;
 
 		case R.id.update_weather:
+			Toast.makeText(this, "update",0).show();
 			String countyCode=getIntent().getStringExtra("county_code");
 			queryWeatherCode(countyCode);
+			break;
+			
+		case R.id.button3:
+			Intent intent2=new Intent(WeatherActivity.this,RecentDaysActivity.class);
+			startActivity(intent2);
+			
 			break;
 		}
 	}

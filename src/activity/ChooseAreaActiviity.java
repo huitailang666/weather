@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -66,7 +67,7 @@ public class ChooseAreaActiviity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
 		/*如果不是从weatheractivity传过来的BACK按键 且  已经选中县
 		 * 直接 回到WeatherActivity
@@ -81,7 +82,6 @@ public class ChooseAreaActiviity extends Activity {
 		
 		
 		setContentView(R.layout.choose_area);
-		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 		listView=(ListView)findViewById(R.id.list_view);
 		titleText=(TextView)findViewById(R.id.title_text);
 		adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dataList);
@@ -194,13 +194,15 @@ public class ChooseAreaActiviity extends Activity {
 			queryCities();
 		}else if(currentLevel==LEVEL_CITY){
 			queryProvinces();
-		}else if(isFromWeatherActivity){
-			//再次返回WtherActivity
+		}else {
+			if(isFromWeatherActivity){
+			//再次返回WeatherActivity
 			Intent intent=new Intent(ChooseAreaActiviity.this, WeatherActivity.class);
 			startActivity(intent);
 		
-		}
+			}
 			finish();
+		}
 		
 	}
 	
